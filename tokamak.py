@@ -39,7 +39,7 @@ E0 = np.array((0, 0, 0))
 B0 = np.array((0, 0, 1))
 w0 = np.abs(charge) * np.sqrt(np.sum(B0*B0, axis=0)) / mass
 dt = 0.01 / w0       # timestep
-Np = 50             # Number of cyclotronic periods
+Np = 300             # Number of cyclotronic periods
 
 Tf = Np * 2 * np.pi / w0
 Nt = int(Tf // dt)  # Number of timesteps
@@ -49,7 +49,7 @@ vx, vy, vz = np.zeros((Nt)), np.zeros((Nt)), np.zeros((Nt))   # velocities
 
 part1 = part.Particle(mass, charge)
 part1.initPos(tok.R, 0, 0)
-part1.initSpeed(0, 100, 1)
+part1.initSpeed(1e7, 1e7, 1)
 
 for i in range(Nt):
     E = E0
