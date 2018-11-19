@@ -18,7 +18,7 @@ N = 1       # Number of particles
 # Parameters and fields
 charge = cst.elemCharge
 mass = cst.Mp
-E0 = np.array((0, 0, 0))
+E0 = np.array((0, 0, 100))
 B = np.array((0, 1, 0))
 w0 = np.abs(charge) * np.sqrt(np.sum(B*B, axis=0)) / mass
 dt = 0.01 / w0       # timestep
@@ -64,13 +64,13 @@ plt.legend()
 plt.xlim((t[0], t[-1]))
 plt.show()
 
-#fig = plt.figure()
-#ax = fig.gca(projection='3d')
-#ax.plot(x, y, z)
-#ax.set_xlabel('x')
-#ax.set_ylabel('y')
-#ax.set_zlabel('z')
-#plt.show()
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.plot(x, y, z)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+plt.show()
 plt.plot(t,E)
 plt.xlim((t[0], t[-1]))
 plt.show()
