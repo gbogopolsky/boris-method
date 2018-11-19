@@ -18,9 +18,9 @@ N = 1       # Number of particles
 # Parameters and fields
 charge = cst.elemCharge
 mass = cst.Mp
-E0 = np.array((0, 0, 100))
-B = np.array((0, 1, 0))
-w0 = np.abs(charge) * np.sqrt(np.sum(B*B, axis=0)) / mass
+E0 = np.array((0, 1, 0))
+B0 = np.array((0, 0, 1))
+w0 = np.abs(charge) * np.sqrt(np.sum(B0*B0, axis=0)) / mass
 dt = 0.01 / w0       # timestep
 Np = 10             # Number of cyclotronic periods
 
@@ -35,8 +35,9 @@ part.initPos(0, 0, 0)
 part.initSpeed(200, 0, 0)
 
 for i in range(Nt):
-    E = E0*np.cos(w0*t[i])
-    part.push(dt, E0, B)
+    E = E0*np.cos(0.01*w0*t[i])
+    B = B0*np.cos(0.01*w0*t[i])
+    part.push(dt, E, B)
     x[i], y[i], z[i] = part.r
     vx[i], vy[i], vz[i] = part.v
     
@@ -51,15 +52,15 @@ print(np.max(vx_error))
 
 # Outputs
 plt.plot(t, vx, label='numeric')
-plt.plot(t, vx_th, label='analytic')
-plt.plot(t, vx_error, label='erreur absolue')
+#plt.plot(t, vx_th, label='analytic')
+#plt.plot(t, vx_error, label='erreur absolue')
 plt.legend()
 plt.xlim((t[0], t[-1]))
 plt.show()
 
 plt.plot(t, vz, label='numeric')
-plt.plot(t, vz_th, label='analytic')
-plt.plot(t, vz_error, label='erreur absolue')
+#plt.plot(t, vz_th, label='analytic')
+#plt.plot(t, vz_error, label='erreur absolue')
 plt.legend()
 plt.xlim((t[0], t[-1]))
 plt.show()
