@@ -7,9 +7,6 @@
 
 import sys
 
-#path = "/home/lucas_fuster/Documents/boris-method/"
-#sys.path.append(path)
-
 import numpy as np
 import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
@@ -48,7 +45,7 @@ Np = 10          # Number of cyclotronic periods
 Tf = Np * 2 * np.pi / w0
 Nt = int(Tf // dt)  # Number of timesteps
 t = np.arange(0, Nt)*dt
-x, y, z = np.zeros((Nt)), np.zeros((Nt)), np.zeros((Nt))    # positions taken by the particle along 
+x, y, z = np.zeros((Nt)), np.zeros((Nt)), np.zeros((Nt))    # positions taken by the particle along
 vx, vy, vz = np.zeros((Nt)), np.zeros((Nt)), np.zeros((Nt))   # velocities
 
 part1 = part.Particle(mass, charge)
@@ -61,7 +58,7 @@ for i in range(Nt):
     part1.push(dt, E, B)
     x[i], y[i], z[i] = part1.r
     vx[i], vy[i], vz[i] = part1.v
-    
+
 x_line, y_line, z_line = tok.get_field_lines()
 
 
