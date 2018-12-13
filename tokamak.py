@@ -5,14 +5,13 @@
 #
 ###############################################################################
 
-import sys
-
 import numpy as np
 import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import constants as cst
 import particle as part
+
 plt.rcParams['legend.fontsize'] = 18
 plt.rcParams['figure.figsize'] = (6,6)
 
@@ -25,7 +24,7 @@ plt.rcParams['figure.figsize'] = (6,6)
 # Courant nominal dans les bobines: I_T = 1400 A
 # Courant plasma: I_P = 1.5 MA
 #
-# Source : https://inis.iaea.org/collection/NCLCollectionStore/_Public/18/075/18075102.pdf   p II.14
+# Source: https://inis.iaea.org/collection/NCLCollectionStore/_Public/18/075/18075102.pdf   p II.14
 ################################################################################
 
 
