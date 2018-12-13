@@ -5,6 +5,11 @@
 #
 ###############################################################################
 
+import sys
+
+#path = "/home/lucas_fuster/Documents/boris-method/"
+#sys.path.append(path)
+
 import numpy as np
 import matplotlib as mpl
 from mpl_toolkits.mplot3d import Axes3D
@@ -14,21 +19,20 @@ import particle as part
 plt.rcParams['legend.fontsize'] = 18
 plt.rcParams['figure.figsize'] = (6,6)
 
-#N = 50
-#z = 0
-#x, y = np.arange(N)+1, np.arange(N)+1
-#Bx, By, Bz = np.zeros((N,N)), np.zeros((N,N)),  np.zeros((N,N)) 
 
-tok = part.Tokamak(4,2,1000,20,10000)
-#for i in range(N):
-#    Bx[i], By[i], Bz[i] = tok.getB(x[i], y[i], z)
+########################### Paramètres Tore Supra ##############################
+# Grand rayon: R = 2.40 m
+# Petit rayon: r = 0.72 m
+# Nombre de bobines: N = 18
+# Nombre de spires par bobine: n = 2028
+# Courant nominal dans les bobines: I_T = 1400 A
+# Courant plasma: I_P = 1.5 MA
+#
+# Source : https://inis.iaea.org/collection/NCLCollectionStore/_Public/18/075/18075102.pdf   p II.14
+################################################################################
 
-#plt.contourf(x, y, Bx, 64)
-#plt.colorbar()
-#plt.show()
-#plt.contourf(x, y, By, 64)
-#plt.colorbar()
-#plt.show()
+
+tok = part.Tokamak(2.40, 0.72, 2028, 18, 1400, 1.5e6, 'T+P')
 
 N = 1       # Number of particles
 
@@ -39,7 +43,7 @@ E0 = np.array((0, 0, 0))
 B0 = np.array((0, 0, 1))
 w0 = np.abs(charge) * np.sqrt(np.sum(B0*B0, axis=0)) / mass
 dt = 0.01 / w0       # timestep
-Np = 300             # Number of cyclotronic periods
+Np = 10          # Number of cyclotronic periods
 
 Tf = Np * 2 * np.pi / w0
 Nt = int(Tf // dt)  # Number of timesteps
@@ -48,8 +52,8 @@ x, y, z = np.zeros((Nt)), np.zeros((Nt)), np.zeros((Nt))    # positions taken by
 vx, vy, vz = np.zeros((Nt)), np.zeros((Nt)), np.zeros((Nt))   # velocities
 
 part1 = part.Particle(mass, charge)
-part1.initPos(tok.R, 0, 0)
-part1.initSpeed(1e7, 1e7, 1)
+part1.initPos(tok.R+0.1*tok.a, 0, 0)
+part1.initSpeed(1e7, 1e7, 0)
 
 for i in range(Nt):
     E = E0
@@ -58,14 +62,16 @@ for i in range(Nt):
     x[i], y[i], z[i] = part1.r
     vx[i], vy[i], vz[i] = part1.v
     
+x_line, y_line, z_line = tok.get_field_lines()
+
 
 fig = plt.figure()
 ax = fig.gca(projection='3d')
 ax.plot(x, y, z)
+for i in range(16):
+    ax.plot(x_line[i,:], y_line[i,:], z_line[i,:], 'r')
+# ax.plot(x_line, y_line, z_line, 'r')
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_zlabel('z')
-plt.show()
-plt.plot(t,E)
-plt.xlim((t[0], t[-1]))
 plt.show()
