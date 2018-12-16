@@ -22,7 +22,7 @@ mass = cst.Mp
 E0 = np.array((0, 25, 0))
 B0 = np.array((0, 0, 1))
 w0 = np.abs(charge) * np.sqrt(np.sum(B0*B0, axis=0)) / mass
-dt = 0.01 / w0       # timestep
+dt = 0.001 / w0       # timestep
 Np = 10             # Number of cyclotronic periods
 
 Tf = Np * 2 * np.pi / w0
