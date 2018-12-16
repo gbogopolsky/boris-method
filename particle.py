@@ -93,42 +93,31 @@ class Tokamak:
             return(BT+BP)
         return()
 
-
-    def RK4(self, p, ds):
-
-
-
-        return(p)
-
-
     def get_field_lines(self):
+        """
+        Returns the field lines for the magnetic field of the tokamak.
+        """
+        thetas = np.array([2*np.pi*i/12 for i in range(16)])
+        ds = 0.004
+        N = int(2*np.pi*(self.R+self.a)/ds)
 
+        p = np.zeros((16,3,N), dtype='float64')
 
-            thetas = np.array([2*np.pi*i/12 for i in range(16)])
+        p[:,0,0] = self.R + (0.95*self.a)*np.cos(thetas)
+        p[:,1,0] = 0
+        p[:,2,0] = (0.95*self.a)*np.sin(thetas)
 
-            ds = 0.004
-            N = int(2*np.pi*(self.R+self.a)/ds)
+        for j in range(16):
+            for i in range(N-1):
+                p_interm = p[j,:,i]
 
-            p = np.zeros((16,3,N), dtype='float64')
+                p1 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
+                p_interm = p[j,:,i] + (ds/2)*p1
+                p2 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
+                p_interm = p[j,:,i] + (ds/2)*p2
+                p3 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
+                p_interm = p[j,:,i] + ds*p3
+                p4 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
 
-            p[:,0,0] = self.R + (0.95*self.a)*np.cos(thetas)
-            p[:,1,0] = 0
-            p[:,2,0] = (0.95*self.a)*np.sin(thetas)
-
-            for j in range(16):
-                for i in range(N-1):
-
-                    p_interm = p[j,:,i]
-
-                    p1 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
-                    p_interm = p[j,:,i] + (ds/2)*p1
-                    p2 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
-                    p_interm = p[j,:,i] + (ds/2)*p2
-                    p3 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
-                    p_interm = p[j,:,i] + ds*p3
-                    p4 = self.getB(*p_interm)#/(np.sum(self.getB(*p_interm)**2)+1)
-
-                    p[j,:,i+1] = p[j,:,i] + (ds/6)*( p1 + 2*p2 + 2*p3 + p4 )
-
-
-            return(p[:,0,:], p[:,1,:], p[:,2,:])
+                p[j,:,i+1] = p[j,:,i] + (ds/6)*( p1 + 2*p2 + 2*p3 + p4 )
+        return(p[:,0,:], p[:,1,:], p[:,2,:])
