@@ -33,10 +33,12 @@ vx, vy, vz = np.zeros((N,Nt)), np.zeros((N,Nt)), np.zeros((N,Nt))   # velocities
 
 type = np.dtype(Particle)
 part = np.zeros((N), dtype=type)
+part[0] = Particle(4*mass, 2*charge)
+part[1] = Particle(mass, charge)
+part[2] = Particle(mass, -charge)
 for n in range(N):
-    part[n] = Particle(mass, charge)
     part[n].initPos(0, 0, 0)
-    part[n].initSpeed(100 + n*100, 0, 0)
+    part[n].initSpeed(200, 0, 0)
 
     for i in range(Nt):
         part[n].push(dt, E0, B0)
