@@ -44,10 +44,10 @@ for i in range(Nt):
 E = 0.5 * mass * (vx**2 + vy**2 + vz**2)
 vx_th = 200 * np.cos(w0*t)
 vx_error = np.abs(vx - vx_th)
-print(np.max(vx_error))
+print(vx_error.max() / vx.max())
 vy_th = 200 * np.sin(w0*t + np.pi)
 vy_error = np.abs(vy - vy_th)
-print(np.max(vy_error))
+print(vy_error.max() / vy.max())
 
 # Outputs
 ## Speed along x
