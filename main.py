@@ -19,7 +19,7 @@ N = 1       # Number of particles
 # Parameters and fields
 charge = cst.elemCharge
 mass = cst.Mp
-E0 = np.array((0, 25, 0))
+E0 = np.array((0, 0, 0))
 B0 = np.array((0, 0, 1))
 w0 = np.abs(charge) * np.sqrt(np.sum(B0*B0, axis=0)) / mass
 dt = 0.001 / w0       # timestep
@@ -59,7 +59,7 @@ plt.ylabel('$v_x$ [m/s]')
 plt.legend()
 plt.xlim((t[0], t[-1]))
 plt.tight_layout()
-plt.savefig('ExB_vx.png')
+# plt.savefig('test_vx.png')
 plt.show()
 
 ## Speed along y
@@ -71,7 +71,7 @@ plt.ylabel('$v_y$ [m/s]')
 plt.legend()
 plt.xlim((t[0], t[-1]))
 plt.tight_layout()
-plt.savefig('ExB_vy.png')
+# plt.savefig('test_vy.png')
 plt.show()
 
 ## 3D trajectory
@@ -81,7 +81,7 @@ ax.plot(x*1e6, y*1e6, z)
 ax.set_xlabel('$x$ [µm]')
 ax.set_ylabel('$y$ [µm]')
 ax.set_zlabel('$z$ [m]')
-plt.savefig('ExB_3d.png')
+# plt.savefig('test_3d.png')
 plt.show()
 
 ## Energy vs. time
@@ -90,5 +90,5 @@ plt.xlabel('$t$ [s]')
 plt.ylabel('$E_c$ [J]')
 plt.xlim((t[0], t[-1]))
 plt.tight_layout()
-plt.savefig('ExB_E.png')
+# plt.savefig('test_E.png')
 plt.show()
