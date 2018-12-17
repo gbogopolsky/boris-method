@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 import constants as cst
 import particle as part
 
-plt.rcParams['legend.fontsize'] = 18
-plt.rcParams['figure.figsize'] = (6,6)
+plt.rcParams["figure.figsize"] = (9,8)
+plt.rcParams['font.size'] = 18
 
 
 ########################### Paramètres Tore Supra ##############################
@@ -60,14 +60,25 @@ for i in range(Nt):
 
 x_line, y_line, z_line = tok.get_field_lines()
 
+# Diagnostics
+Ec = 0.5 * mass * (vx**2 + vy**2 + vz**2)
 
 fig = plt.figure()
 ax = fig.gca(projection='3d')
 ax.plot(x, y, z)
 for i in range(16):
-    ax.plot(x_line[i,:], y_line[i,:], z_line[i,:], 'r')
+    ax.plot(x_line[i,:], y_line[i,:], z_line[i,:], 'r', linewidth=1)
 # ax.plot(x_line, y_line, z_line, 'r')
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
+ax.set_xlabel('$x$')
+ax.set_ylabel('$y$')
+ax.set_zlabel('$z$')
+plt.show()
+
+## Energy vs. time
+plt.plot(t, Ec)
+plt.xlabel('$t$ [s]')
+plt.ylabel('$E_c$ [J]')
+plt.xlim((t[0], t[-1]))
+plt.tight_layout()
+# plt.savefig('test_E.png')
 plt.show()
