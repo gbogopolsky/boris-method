@@ -20,11 +20,14 @@ python3 the_file.py
 ```
 
 You can execute three different scripts:
-- `main.py` for the ExB configuration
-- `error.py` to check the stability of the method vs. the timestep
-- `tokamak.py` to compute the trajectory of a particle in Tore Supra.
+- `main.py` for the cyclotron rotation test case
+- `error.py` to check the stability of the method vs. the timestep,
+- `ExB.py` for the E x B case, with multiple particles,
+- `tokamak.py` for a proton trapped in Tore-Supra, its energy and the magnetic field lines.
 
 ## Thanks
 
 I would like to thank Andrea Ciardi from the [LERMA](https://lerma.obspm.fr/) lab at OBSPM for putting together this practical, of which
 you may find the files [here](https://sites.google.com/site/andreaciardihomepage/teaching?authuser=0).
+
+I also reiterate my thanks to Lucas Fuster, whose help was invaluable, especially, but not only, for the tokamak part of the program.
