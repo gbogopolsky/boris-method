@@ -38,8 +38,8 @@ mass = cst.Mp
 E0 = np.array((0, 0, 0))
 B0 = np.array((0, 0, 1))
 w0 = np.abs(charge) * np.sqrt(np.sum(B0*B0, axis=0)) / mass
-dt = 0.01 / w0       # timestep
-Np = 10          # Number of cyclotronic periods
+dt = 0.001 / w0       # timestep
+Np = 80          # Number of cyclotronic periods
 
 Tf = Np * 2 * np.pi / w0
 Nt = int(Tf // dt)  # Number of timesteps
@@ -69,9 +69,9 @@ ax.plot(x, y, z)
 for i in range(16):
     ax.plot(x_line[i,:], y_line[i,:], z_line[i,:], 'r', linewidth=1)
 # ax.plot(x_line, y_line, z_line, 'r')
-ax.set_xlabel('$x$')
-ax.set_ylabel('$y$')
-ax.set_zlabel('$z$')
+ax.set_xlabel('$x$ [m]')
+ax.set_ylabel('$y$ [m]')
+ax.set_zlabel('$z$ [m]')
 plt.show()
 
 ## Energy vs. time
