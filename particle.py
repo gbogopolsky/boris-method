@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
 #
-#                 Particle class for the Boris method
+#                 Particle & tokamak class for the Boris method
+#
+#                          L. Fuster & G. Bogopolsky
 #
 ###############################################################################
 

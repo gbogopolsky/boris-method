@@ -3,6 +3,8 @@
 #
 #                 Error of Boris algorithm vs the timestep
 #
+#                        L. Fuster & G. Bogopolsky
+#
 ###############################################################################
 
 import numpy as np

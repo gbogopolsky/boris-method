@@ -3,6 +3,8 @@
 #
 #                           The Boris method
 #
+#                      L. Fuster & G. Bogopolsky
+#
 ###############################################################################
 
 import matplotlib as mpl

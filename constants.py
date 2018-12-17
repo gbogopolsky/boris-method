@@ -3,6 +3,8 @@
 #
 #                        Physical & other constants
 #
+#                        L. Fuster & G. Bogopolsky
+#
 ###############################################################################
 
 import numpy as np
